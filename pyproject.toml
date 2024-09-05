@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# See https://setuptools.pypa.io/en/latest/userguide/quickstart.html for more project configuration options.
+name = "moa-llm"
+dynamic = ["version"]
+readme = "README.md"
+classifiers = ["Topic :: Scientific/Engineering :: Artificial Intelligence"]
+authors = [{ name = "Joao Fiadeiro", email = "joao@catena.xyz" }, { name = "Anjor Kanekar", email = "anjor@catena.xyz" }]
+requires-python = ">=3.8"
+dependencies = ["openai", "python-dotenv", "PyYAML"]
+license = { file = "LICENSE" }
+
+[project.urls]
+Homepage = "https://github.com/catena-labs/moa-llm"
+Repository = "https://github.com/catena-labs/moa-llm"
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "black>=23.0,<24.0",
+    "isort>=5.12,<5.14",
+    "pytest",
+    "pytest-sphinx",
+    "pytest-cov",
+    "twine>=1.11.0",
+    "build",
+    "setuptools",
+    "wheel",
+    "packaging"
+]
+
+[tool.setuptools.packages.find]
+exclude = ["*.tests", "*.tests.*", "tests.*", "tests", "docs*", "scripts*"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+moa_llm = ["py.typed"]
+
+[tool.setuptools.dynamic]
+version = { attr = "moa_llm.version.VERSION" }
+
+[tool.black]
+line-length = 100
+include = '\.pyi?$'
+exclude = '''
+(
+      __pycache__
+    | \.git
+    | \.pytest_cache
+    | \.vscode
+    | \.venv
+    | \bdist\b
+    | \bdoc\b
+)
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+# You can override these pyright settings by adding a personal pyrightconfig.json file.
+[tool.pyright]
+reportPrivateImportUsage = false
+
+[tool.ruff]
+line-length = 115
+target-version = "py39"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
