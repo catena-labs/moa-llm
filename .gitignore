@@ -1,3 +1,6 @@
 .venv
-
 pyrightconfig.json
+
+.env.local
+
+examples/openai_compatible_server/outputs
