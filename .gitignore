@@ -1,5 +1,7 @@
 .venv
 pyrightconfig.json
+__pycache__
+*.egg-info
 
 .env.local
 
