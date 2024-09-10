@@ -8,9 +8,12 @@ name = "moa-llm"
 dynamic = ["version"]
 readme = "README.md"
 classifiers = ["Topic :: Scientific/Engineering :: Artificial Intelligence"]
-authors = [{ name = "Joao Fiadeiro", email = "joao@catena.xyz" }, { name = "Anjor Kanekar", email = "anjor@catena.xyz" }]
+authors = [
+    { name = "Joao Fiadeiro", email = "joao@catena.xyz" },
+    { name = "Anjor Kanekar", email = "anjor@catena.xyz" },
+]
 requires-python = ">=3.8"
-dependencies = ["openai", "python-dotenv", "PyYAML"]
+dependencies = ["fastapi", "openai", "python-dotenv", "PyYAML"]
 license = { file = "LICENSE" }
 
 [project.urls]
@@ -29,7 +32,7 @@ dev = [
     "build",
     "setuptools",
     "wheel",
-    "packaging"
+    "packaging",
 ]
 
 [tool.setuptools.packages.find]

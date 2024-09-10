@@ -1,5 +1,5 @@
 import asyncio
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 from .neuron import Neuron
 
@@ -23,7 +23,7 @@ class Layer:
         self.semaphore = asyncio.Semaphore(max_workers)
 
     async def process(
-        self, input_data: str, prev_response: Optional[List[Dict[str, Any]]] = None
+        self, input_data: Union[str, List[Dict[str, str]]], prev_response: Optional[List[Dict[str, Any]]] = None
     ) -> List[Dict[str, Any]]:
         """
         Process the input data through all neurons in the layer concurrently.

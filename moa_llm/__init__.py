@@ -21,4 +21,5 @@ __all__ = [
     "AggregationLayer",
     "MixtureOfAgents",
     "UserQueryAnnotator",
+    "create_moa_from_config",
 ]
