@@ -37,4 +37,4 @@ aggregation_layer:
   max_tokens: 4000
 
 use_weights: false
-base_url: https://crosshatch-router-staging.catena-dev.workers.dev
+base_url: https://api.crosshatch.app
