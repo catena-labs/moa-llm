@@ -2,6 +2,7 @@ import asyncio
 import json
 import time
 from typing import List, Optional
+import sys
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -24,9 +25,12 @@ class ChatCompletionRequest(BaseModel):
     temperature: Optional[float] = 0.7  # This is set up in the moa_config.yaml file
     stream: Optional[bool] = False
 
+if len(sys.argv) > 1:
+    config_path = sys.argv[1]
+else:
+    config_path = "examples/openai_compatible_server/moa_config.yaml"
 
-moa = create_moa_from_config("moa_config.yaml", is_file_path=True)
-
+moa = create_moa_from_config(config_path, is_file_path=True)
 
 async def stream_response(content: str):
     tokens = content.split()

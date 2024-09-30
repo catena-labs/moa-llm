@@ -6,3 +6,4 @@ __pycache__
 .env.local
 
 examples/openai_compatible_server/outputs
+outputs/
