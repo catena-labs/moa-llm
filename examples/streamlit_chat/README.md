@@ -18,9 +18,9 @@ This application allows users to experiment with MoA configurations directly wit
 
 ### Screenshots
 
-![Configuration Screenshot](examples/streamlit_chat/assets/config_screenshot.png?raw=true)
+![Configuration Screenshot](assets/config_screenshot.png?raw=true)
 
-![Chat Screenshot](examples/streamlit_chat/assets/chat_screenshot.png?raw=true)
+![Chat Screenshot](assets/chat_screenshot.png?raw=true)
 
 The application dynamically creates the MoA configuration based on the user's input and enables interactive chat with the configured MoA model.
 
