@@ -16,6 +16,12 @@ streamlit run streamlit_chat_local_server.py
 
 This application allows users to experiment with MoA configurations directly within the Streamlit interface. Users can specify the proposer models, their temperatures, and the aggregator model with its temperature and system prompt.
 
+### Screenshots
+
+![Configuration Screenshot](examples/streamlit_chat/assets/config_screenshot.png?raw=true)
+
+![Chat Screenshot](examples/streamlit_chat/assets/chat_screenshot.png?raw=true)
+
 The application dynamically creates the MoA configuration based on the user's input and enables interactive chat with the configured MoA model.
 
 To run this application, execute the following command:
