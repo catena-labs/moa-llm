@@ -131,7 +131,7 @@ async def chat_page():
         if "moa" in st.session_state:
             moa = st.session_state["moa"]
             # Process user input using MOA
-            result = await moa.process([{"role": "user", "content": user_input}])
+            result = await moa.process(st.session_state["messages"])
             st.session_state["messages"].append({"role": "assistant", "content": result["content"]})
             with st.chat_message("assistant"):
                 st.markdown(result["content"])
@@ -189,7 +189,14 @@ def config_page():
 
     # Proposal layers configuration
     st.subheader("Proposal Layers")
-    num_proposal_layers = st.sidebar.number_input("Number of Proposal Layers", min_value=1, max_value=3, value=len(config["proposal_layers"]), step=1, key="num_proposal_layers")
+    num_proposal_layers = st.sidebar.number_input(
+        "Number of Proposal Layers",
+        min_value=1,
+        max_value=3,
+        value=len(config["proposal_layers"]) if config["proposal_layers"] else 1,  # Set default value to 1 if empty
+        step=1,
+        key="num_proposal_layers",
+    )
     proposal_layers = []
     for layer_idx in range(num_proposal_layers):
         with st.expander(f"Proposal Layer {layer_idx+1}"):
