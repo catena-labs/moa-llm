@@ -17,7 +17,7 @@ class AggregationLayer(Layer):
         aggregation_prompt_template (str | None): Template for aggregating responses.
         shuffle (bool): Whether to shuffle the responses before processing.
         dropout_rate (float): The rate at which to randomly drop responses.
-        use_weights (bool): Whether to use weights for the responses (not implemented in this method).
+        use_weights (bool, optional): Whether to use weights for responses. Defaults to False.
     """
 
     def __init__(
@@ -80,7 +80,10 @@ class AggregationLayer(Layer):
 
     @staticmethod
     def collect_responses(
-        aggregation_prompt_template: str, results: List[Dict[str, Any]], user_query: str
+        aggregation_prompt_template: str,
+        results: List[Dict[str, Any]],
+        user_query: str,
+        use_weights: bool,
     ) -> str:
         """
         Collect and format responses from multiple models for aggregation.
@@ -89,27 +92,23 @@ class AggregationLayer(Layer):
             aggregation_prompt_template (str): The template for formatting the aggregated prompt.
             results (List[Dict[str, Any]]): List of results from different models.
             user_query (str): The original user query.
+            use_weights (bool): Whether to use weights for the responses.
 
         Returns:
             str: Formatted string containing aggregated responses and weights.
         """
         # Combine responses from all models
         responses = "\n".join(
-            [f"Model {i+1}:\n\n{str(result['content'])}" for i, result in enumerate(results)]
+            [
+                f"Model {i+1}: {str(result['content'])} {f'(Weight: {result.get('weight', 1.0)})' if use_weights else ''}"
+                for i, result in enumerate(results)
+            ]
         )
-
-        # Collect weights if available
-        weight_str = ""
-        if any("weight" in result for result in results):
-            weight_str = "\n".join(
-                [f"Model {i+1}: {result.get('weight', 1.0)}" for i, result in enumerate(results)]
-            )
 
         # Prepare arguments for formatting
         format_args = {
             "user_query": user_query,
             "responses": responses,
-            "response_weights": weight_str,
         }
 
         # Ensure all required keys are present in the template

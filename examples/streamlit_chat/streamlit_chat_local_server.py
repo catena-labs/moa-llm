@@ -13,6 +13,9 @@ st.title("MoA Chat")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Get the endpoint URL from the user
+endpoint_url = st.text_input("Enter the endpoint URL", value="http://0.0.0.0:8000/chat/completions")
+
 # Display all previous messages in the chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
@@ -36,7 +39,7 @@ if prompt := st.chat_input("Ask a question"):
     }
 
     # Send a POST request to the MoA model API
-    response = requests.post("http://0.0.0.0:8000/chat/completions", json=payload)
+    response = requests.post(endpoint_url, json=payload)
     data = response.json()
 
     # Extract the assistant's response from the API response
